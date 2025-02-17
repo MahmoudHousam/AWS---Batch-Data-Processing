@@ -1,6 +1,9 @@
 import os
 import boto3
+from dotenv import load_dotenv
 from setup_s3_iam_role import role_arn
+
+load_dotenv()
 
 
 def setup_redshift():
@@ -10,7 +13,7 @@ def setup_redshift():
     namespace = "brain_tumor_namespace"
     database_name = "dev_db"
     admin_username = "admin"
-    admin_password = os.environ["ADMIN_PASSWORD"]
+    admin_password = os.getenv["ADMIN_PASSWORD"]
     redshift_client = boto3.client("redshift-serverless", region_name=aws_region)
 
     try:

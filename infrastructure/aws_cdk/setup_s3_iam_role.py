@@ -1,9 +1,12 @@
 import os
 import json
 import boto3
+from dotenv import load_dotenv
+
+load_dotenv()
 
 aws_region = "us-east-1"
-bucket_name = os.environ["S3_BUCKET_NAME"]
+bucket_name = os.getenv("S3_BUCKET_NAME")
 
 
 def create_s3_bucket():
