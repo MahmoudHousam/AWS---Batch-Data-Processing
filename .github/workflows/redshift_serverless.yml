@@ -19,11 +19,13 @@ jobs:
         run: pip install boto3 python-dotenv
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: GitHubActionsSession
-          aws-region: ${{ secrets.AWS_REGION }}
+        run: |
+          echo "AWS Role ARN: ${{ secrets.AWS_ROLE_ARN }}"
+        # uses: aws-actions/configure-aws-credentials@v2
+        # with:
+        #   role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        #   role-session-name: GitHubActionsSession
+        #   aws-region: ${{ secrets.AWS_REGION }}
       
       - name: Check if the Redshift Cluster exists
         run: |
