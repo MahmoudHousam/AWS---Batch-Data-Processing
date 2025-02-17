@@ -10,7 +10,7 @@ bucket_name = os.getenv("S3_BUCKET_NAME")
 
 
 def create_s3_bucket():
-    s3_client = boto3.create_client("s3", region_name=aws_region)
+    s3_client = boto3.client("s3", region_name=aws_region)
     try:
         print(f"Creating S3 bucket: {bucket_name}")
         s3_client.create_bucket(
