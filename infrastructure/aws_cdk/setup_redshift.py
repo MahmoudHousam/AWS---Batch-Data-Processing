@@ -15,7 +15,7 @@ def setup_redshift():
     namespace = "brain_tumor_namespace"
     database_name = "dev_db"
     admin_username = "admin"
-    admin_password = os.getenv["ADMIN_PASSWORD"]
+    admin_password = os.getenv("ADMIN_PASSWORD")
     redshift_client = boto3.client("redshift-serverless", region_name=aws_region)
 
     try:

@@ -7,7 +7,7 @@ load_dotenv()
 
 aws_region = "us-east-1"
 MY_IP = requests.get("https://api64.ipify.org?format=json").json()["ip"] + "/32"
-security_group_id = os.getenv["SECURITY_GROUP_ID"]
+security_group_id = os.getenv("SECURITY_GROUP_ID")
 ec2_client = boto3.client("ec2", region_name=aws_region)
 
 
