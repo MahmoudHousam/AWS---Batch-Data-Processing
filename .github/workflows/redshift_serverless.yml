@@ -30,10 +30,10 @@ jobs:
           fi
       
       - name: Set Up S3 IAM Role
-        run: python infrastructure/awd_cdk/setup_s3_iam_role.py
+        run: python infrastructure/aws_cdk/setup_s3_iam_role.py
 
       - name: Set Up Redshift
-        run: python infrastructure/awd_cdk/setup_redshift.py
+        run: python infrastructure/aws_cdk/setup_redshift.py
 
       - name: Update Security Group
-        run: python infrastructure/awd_cdk/update_security_group.py
+        run: python infrastructure/aws_cdk/update_security_group.py
