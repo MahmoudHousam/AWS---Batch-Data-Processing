@@ -31,3 +31,7 @@ def update_security_group():
         print("Security Group updated successfully!")
     except Exception as e:
         print(f"Error in updating security group: {e}")
+
+
+if __name__ == "__main__":
+    update_security_group()

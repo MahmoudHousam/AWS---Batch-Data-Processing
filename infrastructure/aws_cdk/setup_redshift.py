@@ -6,8 +6,8 @@ from setup_s3_iam_role import role_arn
 def setup_redshift():
     aws_region = "us-east-1"
     # Initialize Serverless Redshift Instance
-    workgroup = "batch_processing_project_workgroup"
-    namespace = "batch_processing_project_namespace"
+    workgroup = "brain_tumor_workgroup"
+    namespace = "brain_tumor_namespace"
     database_name = "dev_db"
     admin_username = "admin"
     admin_password = os.environ["ADMIN_PASSWORD"]
@@ -41,3 +41,7 @@ def setup_redshift():
         print(f"Username: {admin_username}")
     except Exception as e:
         print(f"Error in Redshift setup {e}")
+
+
+if __name__ == "__main__":
+    setup_redshift()

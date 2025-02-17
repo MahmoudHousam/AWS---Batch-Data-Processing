@@ -72,3 +72,8 @@ def setup_s3_iam_role():
         print("IAM Role successfully attached to S3 permissions!")
     except Exception as e:
         print(f"Error in setup S3 IAM role: {e}")
+
+
+if __name__ == "__main__":
+    create_s3_bucket()
+    setup_s3_iam_role()

@@ -1,0 +1,39 @@
+name: Deploy Redshift Serverless
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-redshift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: pip install boto3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ AWS_REGION }}
+      
+      - name: Check if the Redshift Cluster exists
+        run: |
+          CLUSTER_STATUS=$(aws redshift describe-clusters --cluster-identifier brain_tumor_cluster --query "Clusters[0].ClusterStatus" --output text || echo "NOT_FOUND")
+          echo "Cluster Status: $CLUSTER_STATUS"
+          if [[ "$CLUSTER_STATUS" == "available" ]]; then
+            echo "Redshift is already running. Skipping deployment."
+            exit 0
+          fi
+      
+      - name: Set Up S3 IAM Role
+        run: python setup_s3_iam_role.py
+
+      - name: Set Up Redshift
+        run: python setup_redshift.py
+
+      - name: Update Security Group
+        run: python update_security_group.py
