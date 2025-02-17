@@ -5,8 +5,6 @@ from setup_s3_iam_role import setup_s3_iam_role
 
 load_dotenv()
 
-role_arn = setup_s3_iam_role()
-
 
 def setup_redshift():
     aws_region = "us-east-1"
@@ -17,6 +15,7 @@ def setup_redshift():
     admin_username = "admin"
     admin_password = os.getenv("ADMIN_PASSWORD")
     redshift_client = boto3.client("redshift-serverless", region_name=aws_region)
+    role_arn = setup_s3_iam_role()
 
     try:
         print("Creating Redshift Serverless Namespace...")

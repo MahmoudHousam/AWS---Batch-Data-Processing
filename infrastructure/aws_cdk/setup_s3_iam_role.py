@@ -76,6 +76,7 @@ def setup_s3_iam_role():
         return role_arn
     except Exception as e:
         print(f"Error in setup S3 IAM role: {e}")
+        return None
 
 
 if __name__ == "__main__":
