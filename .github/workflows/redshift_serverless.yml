@@ -6,6 +6,11 @@ on:
 jobs:
   deploy-redshift:
     runs-on: ubuntu-latest
+    env:
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      SECURITY_GROUP_ID: ${{ secrets.SECURITY_GROUP_ID }}
+      S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+      REDSHIFT_CLUSTER_NAME: ${{ secrets.REDSHIFT_CLUSTER_NAME }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -22,7 +27,7 @@ jobs:
       
       - name: Check if the Redshift Cluster exists
         run: |
-          CLUSTER_STATUS=$(aws redshift describe-clusters --cluster-identifier brain_tumor_cluster --query "Clusters[0].ClusterStatus" --output text || echo "NOT_FOUND")
+          CLUSTER_STATUS=$(aws redshift describe-clusters --cluster-identifier $REDSHIFT_CLUSTER_NAME --query "Clusters[0].ClusterStatus" --output text || echo "NOT_FOUND")
           echo "Cluster Status: $CLUSTER_STATUS"
           if [[ "$CLUSTER_STATUS" == "available" ]]; then
             echo "Redshift is already running. Skipping deployment."
