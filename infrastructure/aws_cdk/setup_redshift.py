@@ -1,9 +1,11 @@
 import os
 import boto3
 from dotenv import load_dotenv
-from setup_s3_iam_role import role_arn
+from setup_s3_iam_role import setup_s3_iam_role
 
 load_dotenv()
+
+role_arn = setup_s3_iam_role()
 
 
 def setup_redshift():

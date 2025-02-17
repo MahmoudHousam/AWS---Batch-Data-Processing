@@ -23,8 +23,8 @@ def create_s3_bucket():
 
 
 def setup_s3_iam_role():
-    aws_region = "us-east-1"
     role_name = "RedshiftServerlessS3Role"
+    aws_region = "us-east-1"
 
     # Define the IAM trust ploicy to allow Redshift to assume the role
     trust_policy = {
@@ -75,8 +75,9 @@ def setup_s3_iam_role():
         print("IAM Role successfully attached to S3 permissions!")
     except Exception as e:
         print(f"Error in setup S3 IAM role: {e}")
+    return role_arn
 
 
 if __name__ == "__main__":
     create_s3_bucket()
-    setup_s3_iam_role()
+    # setup_s3_iam_role()
