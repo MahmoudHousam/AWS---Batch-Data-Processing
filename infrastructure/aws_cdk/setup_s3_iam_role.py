@@ -73,9 +73,9 @@ def setup_s3_iam_role():
             PolicyDocument=json.dumps(s3_policy),
         )
         print("IAM Role successfully attached to S3 permissions!")
+        return role_arn
     except Exception as e:
         print(f"Error in setup S3 IAM role: {e}")
-    return role_arn
 
 
 if __name__ == "__main__":
