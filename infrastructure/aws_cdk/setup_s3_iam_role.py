@@ -81,4 +81,4 @@ def setup_s3_iam_role():
 
 if __name__ == "__main__":
     create_s3_bucket()
-    # setup_s3_iam_role()
+    role_arn = setup_s3_iam_role()
