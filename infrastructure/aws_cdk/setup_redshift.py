@@ -38,7 +38,7 @@ def setup_redshift():
         print(f"Namespace {workgroup} created successfully")
         # Print the Redshift connection details
         workgroup_details = workgroup_response["workgroup"]
-        print("\n🚀 Redshift Serverless is Ready! 🚀")
+        print("Redshift Serverless is Ready!")
         print(f"JDBC URL: {workgroup_details['endpoint']['jdbcUrl']}")
         print(f"Database Name: {database_name}")
         print(f"Username: {admin_username}")
