@@ -15,7 +15,6 @@ def create_s3_bucket():
         print(f"Creating S3 bucket: {bucket_name}")
         s3_client.create_bucket(
             Bucket=bucket_name,
-            # CreateBucketConfiguration={"LocationConstraint": aws_region},
         )
         print(f"S3 bucket: {bucket_name} created")
     except Exception as e:
@@ -38,13 +37,18 @@ def setup_s3_iam_role():
         ],
     }
 
-    # Define the IAM plocy to all access to all S3 buckets
     s3_policy = {
         "Version": "2012-10-17",
         "Statement": [
             {
                 "Effect": "Allow",
-                "Action": ["s3.GetObject", "s3.PutObject", "s3.ListBucket"],
+                "Action": [
+                    "s3:CreateBucket",
+                    "s3.ListBucket",
+                    "s3:DeleteBucket",
+                    "s3.GetObject",
+                    "s3.PutObject",
+                ],
                 "Resource": [
                     f"arn:aws:s3:::{bucket_name}",
                     f"arn:aws:s3:::{bucket_name}/*",
@@ -81,4 +85,4 @@ def setup_s3_iam_role():
 
 if __name__ == "__main__":
     create_s3_bucket()
-    # setup_s3_iam_role()
+    role_arn = setup_s3_iam_role()

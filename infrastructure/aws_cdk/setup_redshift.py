@@ -1,7 +1,7 @@
 import os
 import boto3
 from dotenv import load_dotenv
-from setup_s3_iam_role import setup_s3_iam_role
+from setup_s3_iam_role import role_arn
 
 load_dotenv()
 
@@ -15,7 +15,6 @@ def setup_redshift():
     admin_username = "admin"
     admin_password = os.getenv("ADMIN_PASSWORD")
     redshift_client = boto3.client("redshift-serverless", region_name=aws_region)
-    role_arn = setup_s3_iam_role()
 
     try:
         print("Creating Redshift Serverless Namespace...")
@@ -39,7 +38,7 @@ def setup_redshift():
         print(f"Namespace {workgroup} created successfully")
         # Print the Redshift connection details
         workgroup_details = workgroup_response["workgroup"]
-        print("\n🚀 Redshift Serverless is Ready! 🚀")
+        print("Redshift Serverless is Ready!")
         print(f"JDBC URL: {workgroup_details['endpoint']['jdbcUrl']}")
         print(f"Database Name: {database_name}")
         print(f"Username: {admin_username}")
