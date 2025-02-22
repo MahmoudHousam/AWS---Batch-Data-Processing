@@ -15,7 +15,7 @@ def create_s3_bucket():
         print(f"Creating S3 bucket: {bucket_name}")
         s3_client.create_bucket(
             Bucket=bucket_name,
-            CreateBucketConfiguration={"LocationConstraint": aws_region},
+            # CreateBucketConfiguration={"LocationConstraint": aws_region},
         )
         print(f"S3 bucket: {bucket_name} created")
     except Exception as e:
