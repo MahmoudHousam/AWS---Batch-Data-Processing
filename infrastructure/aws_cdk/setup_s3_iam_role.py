@@ -44,11 +44,9 @@ def setup_s3_iam_role():
             {
                 "Effect": "Allow",
                 "Action": [
-                    "s3:CreateBucket",
-                    "s3.ListBucket",
-                    "s3:DeleteBucket",
-                    "s3.GetObject",
-                    "s3.PutObject",
+                    "s3:ListBucket",
+                    "s3:GetObject",
+                    "s3:PutObject",
                 ],
                 "Resource": [
                     f"arn:aws:s3:::{bucket_name}",
