@@ -1,7 +1,7 @@
 import os
 import boto3
 from dotenv import load_dotenv
-from setup_s3_iam_role import role_arn
+from setup_s3_iam_role import role_name
 
 load_dotenv()
 
@@ -15,10 +15,15 @@ def setup_redshift():
     admin_username = "admin"
     admin_password = os.getenv("ADMIN_PASSWORD")
     redshift_client = boto3.client("redshift-serverless", region_name=aws_region)
+    # Fetch the role ARN
+    iam_client = boto3.client("iam", region_name=aws_region)
+    role_details = iam_client.get_role(RoleName=role_name)
+    role_arn = role_details["Role"]["Arn"]
+    print(f"Role ARN fetched: {role_arn}")
 
     try:
         print("Creating Redshift Serverless Namespace...")
-        namespace_response = redshift_client.create_namespace(
+        redshift_client.create_namespace(
             namespaceName=namespace,
             adminUsername=admin_username,
             adminUserPassword=admin_password,
