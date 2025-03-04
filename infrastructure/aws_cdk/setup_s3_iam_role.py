@@ -32,6 +32,7 @@ def create_s3_bucket():
 
 
 def setup_s3_iam_role():
+    global role_arn
     role_name = "RedshiftServerlessS3Role"
     aws_region = "us-east-1"
 
