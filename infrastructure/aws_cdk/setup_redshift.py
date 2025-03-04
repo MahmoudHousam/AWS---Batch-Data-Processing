@@ -9,8 +9,8 @@ load_dotenv()
 def setup_redshift():
     aws_region = "us-east-1"
     # Initialize Serverless Redshift Instance
-    workgroup = "brain_tumor_workgroup"
-    namespace = "brain_tumor_namespace"
+    workgroup = "brain-tumor-workgroup"
+    namespace = "brain-tumor-namespace"
     database_name = "dev_db"
     admin_username = "admin"
     admin_password = os.getenv("ADMIN_PASSWORD")
