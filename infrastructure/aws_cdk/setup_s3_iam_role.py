@@ -5,6 +5,7 @@ import boto3
 from dotenv import load_dotenv
 
 load_dotenv()
+role_arn = None
 
 aws_region = "us-east-1"
 bucket_name = os.getenv("S3_BUCKET_NAME") + f"-{uuid.uuid4()}"
