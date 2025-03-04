@@ -1,4 +1,5 @@
 import os
+import uuid
 import json
 import boto3
 from dotenv import load_dotenv
@@ -6,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 aws_region = "us-east-1"
-bucket_name = os.getenv("S3_BUCKET_NAME")
+bucket_name = os.getenv("S3_BUCKET_NAME") + f"-{uuid.uuid4()}"
 
 
 def create_s3_bucket():
@@ -32,7 +33,7 @@ def setup_s3_iam_role():
             {
                 "Effect": "Allow",
                 "Principal": {"Service": "redshift.amazonaws.com"},
-                "Action": "sts.AssumeRole",
+                "Action": "sts:AssumeRole",
             }
         ],
     }
