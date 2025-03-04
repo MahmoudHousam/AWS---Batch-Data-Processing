@@ -13,13 +13,21 @@ bucket_name = os.getenv("S3_BUCKET_NAME") + f"-{uuid.uuid4()}"
 def create_s3_bucket():
     s3_client = boto3.client("s3", region_name=aws_region)
     try:
+        print(f"Checking if S3 bucket exists: {bucket_name}")
+        s3_client.head_bucket(Bucket=bucket_name)
+        print(f"S3 bucket: {bucket_name} already exists.")
+    except s3_client.exceptions.NoSuchBucket:
         print(f"Creating S3 bucket: {bucket_name}")
-        s3_client.create_bucket(
-            Bucket=bucket_name,
-        )
-        print(f"S3 bucket: {bucket_name} created")
+        try:
+            print(f"Creating S3 bucket: {bucket_name}")
+            s3_client.create_bucket(
+                Bucket=bucket_name,
+            )
+            print(f"S3 bucket: {bucket_name} created")
+        except Exception as create_error:
+            print(f"Error in creating S3 bucket: {create_error}")
     except Exception as e:
-        print(f"Error in creating S3 bucket: {e}")
+        print(f"Unexpected error: {e}")
 
 
 def setup_s3_iam_role():
