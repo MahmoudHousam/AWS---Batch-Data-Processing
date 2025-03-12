@@ -41,7 +41,7 @@ jobs:
         run: python infrastructure/aws_cdk/setup_redshift_serverless_iam_role.py
 
       - name: Set Up Redshift Serverless
-        run: python infrastructure/aws_cdk/setup_redshift.py
+        run: python infrastructure/aws_cdk/setup_redshift_serverless.py
 
       - name: Update Security Group
         run: python infrastructure/aws_cdk/update_security_group.py
