@@ -36,8 +36,11 @@ jobs:
       
       - name: Set Up S3 IAM Role
         run: python infrastructure/aws_cdk/setup_s3_iam_role.py
+      
+      - name: Set Up Redshift Serverless IAM Role
+        run: python infrastructure/aws_cdk/setup_redshift_serverless_iam_role.py
 
-      - name: Set Up Redshift
+      - name: Set Up Redshift Serverless
         run: python infrastructure/aws_cdk/setup_redshift.py
 
       - name: Update Security Group
