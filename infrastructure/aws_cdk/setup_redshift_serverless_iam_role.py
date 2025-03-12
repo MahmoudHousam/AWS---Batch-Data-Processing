@@ -103,6 +103,7 @@ redshift_policy = {
     ],
 }
 
+
 def create_iam_role():
     try:
         print(f"Creating IAM role: {role_name}")
