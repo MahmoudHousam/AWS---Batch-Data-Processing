@@ -15,7 +15,6 @@ def create_s3_bucket():
     s3_client = boto3.client("s3", region_name=aws_region)
     print(f"Creating S3 bucket: {bucket_name}")
     try:
-        print(f"Creating S3 bucket: {bucket_name}")
         s3_client.create_bucket(
             Bucket=bucket_name,
         )

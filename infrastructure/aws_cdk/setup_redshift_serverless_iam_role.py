@@ -2,6 +2,8 @@ import boto3
 import json
 from policies.redshift_policy import redshift_policy
 
+# from ..policies.redshift_policy import redshift_policy
+
 aws_region = "us-east-1"
 iam_client = boto3.client("iam", region_name=aws_region)
 role_name = "GitHubActionsRedshiftRole"

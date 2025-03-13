@@ -8,7 +8,6 @@ load_dotenv()
 
 def setup_redshift():
     aws_region = "us-east-1"
-    # Initialize Serverless Redshift Instance
     workgroup = "brain-tumor-workgroup"
     namespace = "brain-tumor-namespace"
     database_name = "dev_db"
