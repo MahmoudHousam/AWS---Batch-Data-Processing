@@ -6,7 +6,7 @@ from setup_s3_iam_role import role_name
 load_dotenv()
 
 
-def setup_redshift():
+def setup_redshift_Serverless():
     aws_region = "us-east-1"
     workgroup = "brain-tumor-workgroup"
     namespace = "brain-tumor-namespace"
@@ -40,7 +40,6 @@ def setup_redshift():
             publiclyAccessible=True,
         )
         print(f"Namespace {workgroup} created successfully")
-        # Print the Redshift connection details
         workgroup_details = workgroup_response["workgroup"]
         print("Redshift Serverless is Ready!")
         print(f"JDBC URL: {workgroup_details['endpoint']['jdbcUrl']}")
@@ -51,4 +50,4 @@ def setup_redshift():
 
 
 if __name__ == "__main__":
-    setup_redshift()
+    setup_redshift_Serverless()
