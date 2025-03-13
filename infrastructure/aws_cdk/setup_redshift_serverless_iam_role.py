@@ -1,6 +1,7 @@
 import boto3
 import json
-from infrastructure.policies.redshift_policy import redshift_policy
+
+# from infrastructure.policies.redshift_policy import redshift_policy
 
 aws_region = "us-east-1"
 iam_client = boto3.client("iam", region_name=aws_region)
@@ -22,6 +23,85 @@ trust_policy = {
                 }
             },
         }
+    ],
+}
+
+redshift_policy = {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "redshift:*",
+                "redshift-serverless:*",
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeInternetGateways",
+                "ec2:AuthorizeSecurityGroupIngress",
+                "sns:CreateTopic",
+                "sns:Get*",
+                "sns:List*",
+                "cloudwatch:Describe*",
+                "cloudwatch:Get*",
+                "cloudwatch:List*",
+                "cloudwatch:PutMetricAlarm",
+                "cloudwatch:EnableAlarmActions",
+                "cloudwatch:DisableAlarmActions",
+                "tag:GetResources",
+                "tag:UntagResources",
+                "tag:GetTagValues",
+                "tag:GetTagKeys",
+                "tag:TagResources",
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+        },
+        {
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "arn:aws:iam::*:role/aws-service-role/redshift.amazonaws.com/AWSServiceRoleForRedshift",
+            "Condition": {
+                "StringLike": {"iam:AWSServiceName": "redshift.amazonaws.com"}
+            },
+        },
+        {
+            "Sid": "DataAPIPermissions",
+            "Action": [
+                "redshift-data:ExecuteStatement",
+                "redshift-data:CancelStatement",
+                "redshift-data:ListStatements",
+                "redshift-data:GetStatementResult",
+                "redshift-data:DescribeStatement",
+                "redshift-data:ListDatabases",
+                "redshift-data:ListSchemas",
+                "redshift-data:ListTables",
+                "redshift-data:DescribeTable",
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+        },
+        {
+            "Sid": "SecretsManagerListPermissions",
+            "Action": ["secretsmanager:ListSecrets"],
+            "Effect": "Allow",
+            "Resource": "*",
+        },
+        {
+            "Sid": "SecretsManagerCreateGetPermissions",
+            "Action": [
+                "secretsmanager:CreateSecret",
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:TagResource",
+            ],
+            "Effect": "Allow",
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {"secretsmanager:ResourceTag/RedshiftDataFullAccess": "*"}
+            },
+        },
     ],
 }
 
