@@ -25,15 +25,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       
-      - name: Check if the Redshift Cluster exists
-        run: |
-          CLUSTER_STATUS=$(aws redshift describe-clusters --cluster-identifier $REDSHIFT_CLUSTER_NAME --query "Clusters[0].ClusterStatus" --output text || echo "NOT_FOUND")
-          echo "Cluster Status: $CLUSTER_STATUS"
-          if [[ "$CLUSTER_STATUS" == "available" ]]; then
-            echo "Redshift is already running. Skipping deployment."
-            exit 0
-          fi
-      
       - name: Set Up S3 IAM Role
         run: python infrastructure/aws_cdk/setup_s3_iam_role.py
       

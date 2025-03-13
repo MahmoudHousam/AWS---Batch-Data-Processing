@@ -1,7 +1,7 @@
 import os
 import boto3
 from dotenv import load_dotenv
-from setup_s3_iam_role import role_name
+from setup_redshift_serverless_iam_role import role_name
 
 load_dotenv()
 
